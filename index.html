@@ -9,637 +9,696 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --charcoal: #131210;
-      --charcoal-2: #1d1b18;
-      --charcoal-3: #262420;
-      --gold: #c5973a;
-      --gold-light: #dbb96a;
-      --gold-pale: #f0e3c0;
-      --cream: #f5ede0;
-      --cream-dim: #c9bfaf;
-      --white: #fdfaf5;
-      --border: rgba(197,151,58,0.18);
-      --border-dim: rgba(255,255,255,0.07);
+      --charcoal: #131210; --charcoal-2: #1d1b18; --charcoal-3: #262420;
+      --gold: #c5973a; --gold-light: #dbb96a; --gold-pale: #f0e3c0;
+      --cream: #f5ede0; --cream-dim: #c9bfaf; --white: #fdfaf5;
+      --border: rgba(197,151,58,0.18); --border-dim: rgba(255,255,255,0.07);
     }
-
     html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--charcoal); color: var(--cream); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--charcoal);
-      color: var(--cream);
-      font-weight: 300;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.5rem 5vw;
-      background: rgba(19,18,16,0.88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border-dim);
-    }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem; font-weight: 600; letter-spacing: 0.12em;
-      color: var(--gold-light); text-transform: uppercase; text-decoration: none;
-    }
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 5vw; background: rgba(19,18,16,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border-dim); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.12em; color: var(--gold-light); text-transform: uppercase; text-decoration: none; }
     .nav-logo span { color: var(--cream-dim); font-weight: 300; }
     .nav-links { display: flex; gap: 2.4rem; list-style: none; }
-    .nav-links a {
-      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--cream-dim); text-decoration: none; transition: color 0.25s;
-    }
+    .nav-links a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-dim); text-decoration: none; transition: color 0.25s; }
     .nav-links a:hover { color: var(--gold-light); }
-    .nav-cta {
-      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--charcoal); background: var(--gold); border: none;
-      padding: 0.6rem 1.4rem; cursor: pointer;
-      font-family: 'DM Sans', sans-serif; font-weight: 500;
-      transition: background 0.25s;
-    }
+    .nav-cta { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal); background: var(--gold); border: none; padding: 0.6rem 1.4rem; cursor: pointer; font-family: 'DM Sans', sans-serif; font-weight: 500; transition: background 0.25s; }
     .nav-cta:hover { background: var(--gold-light); }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 120px 5vw 8vh;
-      position: relative; overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        linear-gradient(to bottom, rgba(19,18,16,0.3) 0%, rgba(19,18,16,0.75) 60%, var(--charcoal) 100%),
-        repeating-linear-gradient(45deg, rgba(197,151,58,0.025) 0px, rgba(197,151,58,0.025) 1px, transparent 1px, transparent 60px),
-        repeating-linear-gradient(-45deg, rgba(197,151,58,0.025) 0px, rgba(197,151,58,0.025) 1px, transparent 1px, transparent 60px);
-      background-color: #1a1714;
-    }
-    .hero-bg::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(197,151,58,0.08) 0%, transparent 70%);
-    }
-    .hero-eyebrow {
-      position: relative;
-      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.5rem;
-      display: flex; align-items: center; gap: 1rem;
-    }
-    .hero-eyebrow::before {
-      content: ''; display: block; width: 40px; height: 1px; background: var(--gold);
-    }
-    .hero-title {
-      position: relative;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 5.5vw, 5.5rem);
-      font-weight: 300; line-height: 1.1;
-      color: var(--white);
-      margin-bottom: 2.5rem;
-      max-width: 900px;
-    }
-    .hero-title em {
-      font-style: italic; color: var(--gold-light);
-    }
-    .hero-sub {
-      position: relative;
-      max-width: 500px; font-size: 0.92rem;
-      color: var(--cream-dim); line-height: 1.8; margin-bottom: 3rem;
-    }
-    .hero-actions { position: relative; display: flex; align-items: center; gap: 2.5rem; }
-    .btn-primary {
-      display: inline-block; padding: 1rem 2.6rem;
-      background: var(--gold); color: var(--charcoal);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
-      text-decoration: none; border: none; cursor: pointer; transition: background 0.25s;
-    }
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 5vw 8vh; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(19,18,16,0.3) 0%, rgba(19,18,16,0.75) 60%, var(--charcoal) 100%), repeating-linear-gradient(45deg, rgba(197,151,58,0.025) 0px, rgba(197,151,58,0.025) 1px, transparent 1px, transparent 60px), repeating-linear-gradient(-45deg, rgba(197,151,58,0.025) 0px, rgba(197,151,58,0.025) 1px, transparent 1px, transparent 60px); background-color: #1a1714; }
+    .hero-bg::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(197,151,58,0.08) 0%, transparent 70%); }
+    .hero-eyebrow { position: relative; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+    .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); }
+    .hero-title { position: relative; font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5.5vw, 5.5rem); font-weight: 300; line-height: 1.1; color: var(--white); margin-bottom: 2.5rem; max-width: 900px; }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+    .hero-sub { position: relative; max-width: 500px; font-size: 0.92rem; color: var(--cream-dim); line-height: 1.8; margin-bottom: 3rem; }
+    .hero-actions { position: relative; display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; padding: 1rem 2.6rem; background: var(--gold); color: var(--charcoal); font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: background 0.25s; }
     .btn-primary:hover { background: var(--gold-light); }
-    .btn-ghost {
-      font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--cream-dim); text-decoration: none; border-bottom: 1px solid var(--border);
-      padding-bottom: 2px; transition: color 0.25s, border-color 0.25s;
-    }
+    .btn-ghost { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cream-dim); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: color 0.25s, border-color 0.25s; }
     .btn-ghost:hover { color: var(--gold-light); border-color: var(--gold-light); }
-    .hero-scroll {
-      position: absolute; right: 5vw; bottom: 8vh;
-      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--cream-dim); writing-mode: vertical-rl;
-      display: flex; align-items: center; gap: 1rem;
-    }
-    .hero-scroll::after {
-      content: ''; display: block; width: 1px; height: 60px; background: var(--border);
-    }
+    .hero-scroll { position: absolute; right: 5vw; bottom: 8vh; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream-dim); writing-mode: vertical-rl; display: flex; align-items: center; gap: 1rem; }
+    .hero-scroll::after { content: ''; display: block; width: 1px; height: 60px; background: var(--border); }
 
-    /* ── SECTION SHELL ── */
+    /* SECTION */
     section { padding: 7rem 5vw; }
-    .section-label {
-      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.2rem;
-      display: flex; align-items: center; gap: 1rem;
-    }
+    .section-label { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 1rem; }
     .section-label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 4vw, 3.8rem);
-      font-weight: 300; line-height: 1.1; color: var(--white);
-      max-width: 700px; margin-bottom: 1.5rem;
-    }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 300; line-height: 1.1; color: var(--white); max-width: 700px; margin-bottom: 1.5rem; }
     .section-title em { font-style: italic; color: var(--gold-light); }
-    .section-body {
-      max-width: 560px; font-size: 0.92rem;
-      color: var(--cream-dim); line-height: 1.85;
-    }
+    .section-body { max-width: 560px; font-size: 0.92rem; color: var(--cream-dim); line-height: 1.85; }
+    .divider { width: calc(100% - 10vw); margin: 0 auto; height: 1px; background: var(--border-dim); }
 
-    /* ── DIVIDER ── */
-    .divider {
-      width: calc(100% - 10vw); margin: 0 auto;
-      height: 1px; background: var(--border-dim);
-    }
-
-    /* ── SERVICES ── */
+    /* SERVICES */
     .services { background: var(--charcoal-2); }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1px;
-      margin-top: 4.5rem;
-      border: 1px solid var(--border-dim);
-    }
-    .service-card {
-      padding: 2.4rem 2rem;
-      background: var(--charcoal-2);
-      border: 1px solid transparent;
-      transition: background 0.3s, border-color 0.3s;
-      cursor: default;
-    }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; margin-top: 4.5rem; border: 1px solid var(--border-dim); }
+    .service-card { padding: 2.4rem 2rem; background: var(--charcoal-2); border: 1px solid transparent; transition: background 0.3s, border-color 0.3s; cursor: default; }
     .service-card:hover { background: var(--charcoal-3); border-color: var(--border); }
-    .service-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.4rem; font-weight: 300; color: var(--border);
-      line-height: 1; margin-bottom: 1.4rem;
-      transition: color 0.3s;
-    }
+    .service-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; color: var(--border); line-height: 1; margin-bottom: 1.4rem; transition: color 0.3s; }
     .service-card:hover .service-num { color: var(--gold); }
-    .service-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem; font-weight: 500; color: var(--white);
-      margin-bottom: 0.8rem; line-height: 1.2;
-    }
+    .service-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; color: var(--white); margin-bottom: 0.8rem; line-height: 1.2; }
     .service-desc { font-size: 0.85rem; color: var(--cream-dim); line-height: 1.8; }
 
-    /* ── ABOUT ── */
-    .about { background: var(--charcoal); }
-    .about-inner {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6vw; align-items: center;
-    }
-    .about-visual {
-      position: relative; aspect-ratio: 3/4;
-      background: var(--charcoal-3);
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
-    }
-    .about-visual-inner {
-      position: absolute; inset: 0;
-      background:
-        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(197,151,58,0.05) 39px, rgba(197,151,58,0.05) 40px),
-        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(197,151,58,0.05) 39px, rgba(197,151,58,0.05) 40px);
-    }
-    .about-monogram {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 9rem; font-weight: 300; color: rgba(197,151,58,0.12);
-      font-style: italic; position: relative; z-index: 1;
-      user-select: none;
-    }
-    .about-badge {
-      position: absolute; bottom: 2rem; right: -1.5rem;
-      background: var(--gold); color: var(--charcoal);
-      padding: 1.2rem 1.6rem;
-      font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500;
-      line-height: 1.6;
-    }
-    .about-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 2.5vw, 2.8rem);
-      font-weight: 400; color: var(--white); margin-bottom: 0.3rem;
-    }
-    .about-role {
-      font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 2rem;
-    }
-    .about-text { font-size: 0.9rem; color: var(--cream-dim); line-height: 1.85; margin-bottom: 1.2rem; }
-    .about-stats {
-      display: flex; gap: 3rem; margin-top: 2.5rem;
-      padding-top: 2.5rem; border-top: 1px solid var(--border-dim);
-    }
-    .stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.4rem; font-weight: 300; color: var(--gold-light); line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--cream-dim); margin-top: 0.4rem;
-    }
+    /* GALLERY */
+    .gallery { background: var(--charcoal); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto; gap: 12px; margin-top: 3.5rem; }
+    .gallery-item { position: relative; overflow: hidden; cursor: pointer; background: var(--charcoal-3); aspect-ratio: 4/3; }
+    .gallery-item.tall { grid-row: span 2; aspect-ratio: unset; }
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(19,18,16,0.7) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; display: flex; align-items: flex-end; padding: 1.2rem; }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay span { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light); }
+    .gallery-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.8rem; background: var(--charcoal-3); color: var(--cream-dim); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 2rem; text-align: center; min-height: 200px; }
+    .gallery-placeholder svg { width: 32px; height: 32px; stroke: var(--gold); fill: none; stroke-width: 1.2; opacity: 0.5; }
 
-    /* ── VALUES ── */
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(10,9,8,0.95); align-items: center; justify-content: center; }
+    .lightbox.open { display: flex; }
+    .lightbox-img { max-width: 90vw; max-height: 85vh; object-fit: contain; border: 1px solid var(--border); }
+    .lightbox-close { position: absolute; top: 1.5rem; right: 2rem; font-size: 2rem; color: var(--cream-dim); cursor: pointer; background: none; border: none; line-height: 1; transition: color 0.2s; }
+    .lightbox-close:hover { color: var(--gold-light); }
+    .lightbox-caption { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cream-dim); }
+
+    /* ABOUT */
+    .about { background: var(--charcoal); }
+    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; align-items: center; }
+    .about-visual { position: relative; aspect-ratio: 3/4; background: var(--charcoal-3); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .about-visual-inner { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(197,151,58,0.05) 39px, rgba(197,151,58,0.05) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(197,151,58,0.05) 39px, rgba(197,151,58,0.05) 40px); }
+    .about-monogram { font-family: 'Cormorant Garamond', serif; font-size: 9rem; font-weight: 300; color: rgba(197,151,58,0.12); font-style: italic; position: relative; z-index: 1; user-select: none; }
+    .about-badge { position: absolute; bottom: 2rem; right: -1.5rem; background: var(--gold); color: var(--charcoal); padding: 1.2rem 1.6rem; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; line-height: 1.6; }
+    .about-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 2.5vw, 2.8rem); font-weight: 400; color: var(--white); margin-bottom: 0.3rem; }
+    .about-role { font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
+    .about-text { font-size: 0.9rem; color: var(--cream-dim); line-height: 1.85; margin-bottom: 1.2rem; }
+    .about-stats { display: flex; gap: 3rem; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border-dim); }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; color: var(--gold-light); line-height: 1; }
+    .stat-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream-dim); margin-top: 0.4rem; }
+
+    /* VALUES */
     .values { background: var(--charcoal-2); }
     .values-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 4rem; margin-bottom: 4rem; flex-wrap: wrap; }
     .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; }
     .value-item { border-top: 1px solid var(--border); padding-top: 1.6rem; }
-    .value-icon {
-      width: 36px; height: 36px; margin-bottom: 1.2rem;
-      color: var(--gold);
-    }
+    .value-icon { width: 36px; height: 36px; margin-bottom: 1.2rem; color: var(--gold); }
     .value-icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.2; }
-    .value-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem; font-weight: 500; color: var(--white); margin-bottom: 0.6rem;
-    }
+    .value-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 500; color: var(--white); margin-bottom: 0.6rem; }
     .value-body { font-size: 0.84rem; color: var(--cream-dim); line-height: 1.8; }
 
-    /* ── PROCESS ── */
+    /* PROCESS */
     .process { background: var(--charcoal); }
-    .process-steps { margin-top: 4rem; display: flex; flex-direction: column; gap: 0; }
-    .process-step {
-      display: grid; grid-template-columns: 80px 1fr;
-      gap: 2rem; padding: 2.5rem 0;
-      border-bottom: 1px solid var(--border-dim);
-      align-items: start;
-    }
+    .process-steps { margin-top: 4rem; display: flex; flex-direction: column; }
+    .process-step { display: grid; grid-template-columns: 80px 1fr; gap: 2rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border-dim); align-items: start; }
     .process-step:last-child { border-bottom: none; }
-    .step-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem; font-weight: 300; color: var(--border);
-      line-height: 1;
-    }
-    .step-content {}
-    .step-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem; font-weight: 500; color: var(--white);
-      margin-bottom: 0.5rem;
-    }
+    .step-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--border); line-height: 1; }
+    .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 500; color: var(--white); margin-bottom: 0.5rem; }
     .step-desc { font-size: 0.86rem; color: var(--cream-dim); line-height: 1.8; }
 
-    /* ── WHO WE SERVE ── */
+    /* CLIENTS */
     .clients { background: var(--charcoal-2); }
-    .clients-list {
-      display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 3rem;
-    }
-    .client-pill {
-      padding: 0.6rem 1.4rem;
-      border: 1px solid var(--border);
-      font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--cream-dim);
-    }
+    .clients-list { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 3rem; }
+    .client-pill { padding: 0.6rem 1.4rem; border: 1px solid var(--border); font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream-dim); }
 
-    /* ── CONTACT STRIP ── */
-    .contact {
-      background: var(--gold);
-      padding: 6rem 5vw;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 2rem;
-    }
-    .contact-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 3.5vw, 3rem);
-      font-weight: 300; color: var(--charcoal); line-height: 1.2;
-    }
-    .contact-headline em { font-style: italic; }
-    .btn-dark {
-      display: inline-block; padding: 1rem 2.6rem;
-      background: var(--charcoal); color: var(--gold-light);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
-      text-decoration: none; white-space: nowrap; transition: background 0.25s;
-    }
-    .btn-dark:hover { background: #222; }
+    /* CONTACT SECTION */
+    .contact-section { background: var(--charcoal); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; align-items: start; }
+    .contact-info { }
+    .contact-details { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.2rem; }
+    .contact-detail { display: flex; align-items: flex-start; gap: 1rem; }
+    .contact-detail-icon { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.5; flex-shrink: 0; margin-top: 3px; }
+    .contact-detail-text { font-size: 0.88rem; color: var(--cream-dim); line-height: 1.6; }
+    .contact-detail-text a { color: var(--cream-dim); text-decoration: none; transition: color 0.2s; }
+    .contact-detail-text a:hover { color: var(--gold-light); }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--charcoal);
-      padding: 3.5rem 5vw;
-      border-top: 1px solid var(--border-dim);
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 2rem; align-items: center;
+    /* FORM */
+    .form-card { background: var(--charcoal-2); padding: 2.5rem; border: 1px solid var(--border-dim); }
+    .form-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; color: var(--white); margin-bottom: 0.4rem; }
+    .form-sub { font-size: 0.82rem; color: var(--cream-dim); margin-bottom: 2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .form-group label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+    .form-group input, .form-group select, .form-group textarea {
+      background: var(--charcoal-3); border: 1px solid var(--border-dim); color: var(--cream);
+      padding: 0.75rem 1rem; font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+      outline: none; transition: border-color 0.2s; width: 100%; resize: none;
     }
-    .footer-brand {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.5rem;
-    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group select option { background: var(--charcoal-3); }
+    .form-submit { width: 100%; padding: 1rem; background: var(--gold); color: var(--charcoal); font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.25s; margin-top: 0.5rem; }
+    .form-submit:hover { background: var(--gold-light); }
+    .form-success { display: none; text-align: center; padding: 2rem; }
+    .form-success-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .form-success-text { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--white); margin-bottom: 0.5rem; }
+    .form-success-sub { font-size: 0.85rem; color: var(--cream-dim); }
+
+    /* CTA STRIP */
+    .cta-strip { background: var(--gold); padding: 6rem 5vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+    .cta-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 300; color: var(--charcoal); line-height: 1.2; }
+    .cta-headline em { font-style: italic; }
+    .btn-wa-cta { display: inline-flex; align-items: center; gap: 0.6rem; padding: 1rem 2rem; background: var(--charcoal); color: var(--gold-light); font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; white-space: nowrap; transition: background 0.25s; }
+    .btn-wa-cta:hover { background: #222; }
+
+    /* FOOTER */
+    footer { background: var(--charcoal); padding: 3.5rem 5vw; border-top: 1px solid var(--border-dim); display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.5rem; }
     .footer-tagline { font-size: 0.8rem; color: var(--cream-dim); letter-spacing: 0.06em; }
     .footer-contact { text-align: right; }
-    .footer-contact a {
-      display: block; font-size: 0.82rem; color: var(--cream-dim);
-      text-decoration: none; margin-bottom: 0.3rem; transition: color 0.2s;
-    }
+    .footer-contact a { display: block; font-size: 0.82rem; color: var(--cream-dim); text-decoration: none; margin-bottom: 0.3rem; transition: color 0.2s; }
     .footer-contact a:hover { color: var(--gold-light); }
-    .footer-copy {
-      grid-column: 1 / -1;
-      font-size: 0.72rem; color: rgba(201,191,175,0.35);
-      letter-spacing: 0.08em; padding-top: 2rem;
-      border-top: 1px solid var(--border-dim);
-    }
+    .footer-copy { grid-column: 1 / -1; font-size: 0.72rem; color: rgba(201,191,175,0.35); letter-spacing: 0.08em; padding-top: 2rem; border-top: 1px solid var(--border-dim); }
 
-    /* ── WHATSAPP ── */
-    .btn-wa {
-      display: inline-flex; align-items: center;
-      background: #25D366; color: #fff !important;
-      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em;
-      padding: 1rem 2rem; text-decoration: none; white-space: nowrap;
-      transition: background 0.25s;
-    }
-    .btn-wa:hover { background: #1ebe5d; }
-    .wa-float {
-      position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
-      width: 58px; height: 58px; border-radius: 50%;
-      background: #25D366;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      animation: waPulse 2.5s ease-in-out infinite;
-    }
-    .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.55); animation: none; }
-    .wa-tooltip {
-      position: absolute; right: 68px; top: 50%; transform: translateY(-50%);
-      background: var(--charcoal); color: var(--cream);
-      font-size: 0.75rem; white-space: nowrap; padding: 0.4rem 0.9rem;
-      pointer-events: none; opacity: 0; transition: opacity 0.2s;
-      border: 1px solid var(--border-dim);
-    }
-    .wa-float:hover .wa-tooltip { opacity: 1; }
-    @keyframes waPulse {
-      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
-      50% { box-shadow: 0 4px 32px rgba(37,211,102,0.7); }
-    }
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .hero-eyebrow { animation: fadeUp 0.8s ease both 0.2s; }
-    .hero-title { animation: fadeUp 0.9s ease both 0.4s; }
-    .hero-sub { animation: fadeUp 0.8s ease both 0.6s; }
-    .hero-actions { animation: fadeUp 0.8s ease both 0.8s; }
+    .checkbox-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:0.3rem}
+    .cb-item{display:flex;align-items:center;gap:0.5rem;cursor:pointer;padding:0.5rem 0.7rem;border:1px solid var(--border-dim);background:var(--charcoal-3);transition:border-color 0.2s,background 0.2s;font-size:0.85rem;color:var(--cream-dim)}
+    .cb-item:hover{border-color:var(--gold)}
+    .cb-item input[type=checkbox]{accent-color:var(--gold);width:15px;height:15px;flex-shrink:0;cursor:pointer}
+    .cb-item input[type=checkbox]:checked+span{color:var(--gold-light)}
+    .cb-item:has(input:checked){border-color:var(--gold);background:rgba(197,151,58,0.08)}
+    /* WHATSAPP BOT */
+    .wa-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; width: 58px; height: 58px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); text-decoration: none; cursor: pointer; border: none; transition: transform 0.2s; animation: waPulse 2.5s ease-in-out infinite; }
+    .wa-float:hover { transform: scale(1.1); animation: none; }
+    @keyframes waPulse { 0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.4)} 50%{box-shadow:0 4px 32px rgba(37,211,102,0.7)} }
 
-    /* ── MOBILE ── */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .about-inner { grid-template-columns: 1fr; }
-      .about-visual { display: none; }
-      .about-stats { gap: 2rem; }
-      .contact { flex-direction: column; }
-      footer { grid-template-columns: 1fr; }
-      .footer-contact { text-align: left; }
+    .wa-bot { position: fixed; bottom: 6rem; right: 2rem; z-index: 998; width: 360px; max-height: 550px; background: #fff; border-radius: 16px; box-shadow: 0 12px 50px rgba(0,0,0,0.4); display: none; flex-direction: column; overflow: hidden; }
+    .wa-bot.open { display: flex; }
+    .wa-bot-header { background: #075E54; padding: 1rem 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+    .wa-bot-avatar { width: 40px; height: 40px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .wa-bot-name { color: #fff; font-weight: 500; font-size: 0.95rem; }
+    .wa-bot-status { color: rgba(255,255,255,0.7); font-size: 0.75rem; }
+    .wa-bot-close { margin-left: auto; background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; font-size: 1.3rem; line-height: 1; padding: 0.2rem; }
+    .wa-bot-messages { flex: 1; overflow-y: auto; padding: 1rem; background: #ECE5DD; display: flex; flex-direction: column; gap: 0.8rem; min-height: 280px; max-height: 320px; }
+    .wa-msg { max-width: 85%; padding: 0.6rem 0.9rem; border-radius: 8px; font-size: 0.85rem; line-height: 1.5; }
+    .wa-msg.bot { background: #fff; color: #303030; border-radius: 0 8px 8px 8px; align-self: flex-start; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+    .wa-msg.user { background: #DCF8C6; color: #303030; border-radius: 8px 0 8px 8px; align-self: flex-end; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+    .wa-msg.bot b { color: #075E54; }
+    .wa-bot-input-area { padding: 0.8rem; background: #f0f0f0; border-top: 1px solid #ddd; display: flex; flex-direction: column; gap: 0.6rem; }
+    .wa-bot-input { width: 100%; padding: 0.6rem 0.9rem; border: 1px solid #ddd; border-radius: 20px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; outline: none; resize: none; background: #fff; }
+    .wa-bot-input:focus { border-color: #25D366; }
+    .wa-bot-send { background: #25D366; color: #fff; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s; }
+    .wa-bot-send:hover { background: #128C7E; }
+    .wa-input-row { display: flex; gap: 0.5rem; align-items: center; }
+    .wa-file-btn { background: none; border: none; cursor: pointer; color: #666; padding: 0.3rem; display: flex; align-items: center; }
+    .wa-file-btn:hover { color: #25D366; }
+    .wa-file-name { font-size: 0.75rem; color: #666; margin-top: 0.3rem; background: #e8e8e8; padding: 0.3rem 0.7rem; border-radius: 10px; display: none; }
+    .wa-options { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .wa-option-btn { background: #fff; border: 1px solid #25D366; color: #075E54; padding: 0.4rem 0.9rem; border-radius: 16px; font-size: 0.78rem; cursor: pointer; transition: background 0.2s; }
+    .wa-option-btn:hover { background: #25D366; color: #fff; }
+    .wa-typing { display: flex; gap: 4px; align-items: center; padding: 0.6rem 0.9rem; background: #fff; border-radius: 0 8px 8px 8px; align-self: flex-start; }
+    .wa-typing span { width: 7px; height: 7px; background: #999; border-radius: 50%; animation: typing 1s infinite; }
+    .wa-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .wa-typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    .hero-eyebrow{animation:fadeUp 0.8s ease both 0.2s}
+    .hero-title{animation:fadeUp 0.9s ease both 0.4s}
+    .hero-sub{animation:fadeUp 0.8s ease both 0.6s}
+    .hero-actions{animation:fadeUp 0.8s ease both 0.8s}
+
+    /* MOBILE */
+    @media(max-width:768px){
+      .nav-links{display:none}
+      .about-inner{grid-template-columns:1fr}
+      .about-visual{display:none}
+      .about-stats{gap:2rem}
+      .contact-inner{grid-template-columns:1fr}
+      .form-row{grid-template-columns:1fr}
+      footer{grid-template-columns:1fr}
+      .footer-contact{text-align:left}
+      .gallery-grid{grid-template-columns:1fr 1fr}
+      .gallery-item.tall{grid-row:span 1}
+      .gallery-item.wide{grid-column:span 2}
+      .wa-bot{width:calc(100vw - 2rem);right:1rem;bottom:5.5rem}
+      .cta-strip{flex-direction:column}
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#" class="nav-logo">Sakshi <span>Interiors</span></a>
-    <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
-  </nav>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Sakshi <span>Interiors</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-bg"></div>
-    <p class="hero-eyebrow">Execution-Focused Interior & Renovation</p>
-    <h1 class="hero-title">
-      Built with<br /><em>precision.</em><br />Finished with care.
-    </h1>
-    <p class="hero-sub">
-      From shell stage to final handover — SAKSHI INTERIORS delivers end-to-end interior execution with quality workmanship, proper detailing, and on-site coordination you can count on.
-    </p>
-    <div class="hero-actions">
-      <a href="#services" class="btn-primary">Explore Services</a>
-      <a href="#about" class="btn-ghost">Meet Vinay Jaiswal</a>
-    </div>
-    <div class="hero-scroll">Scroll</div>
-  </section>
-
-  <!-- SERVICES -->
-  <section class="services" id="services">
-    <p class="section-label">What We Do</p>
-    <h2 class="section-title">End-to-end <em>execution</em> across every trade</h2>
-    <p class="section-body">We handle the complete spectrum of interior and renovation work — one team, one point of accountability, zero compromises on quality.</p>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-num">01</div>
-        <h3 class="service-name">Tile &amp; Stone Installation</h3>
-        <p class="service-desc">Precise laying of ceramic, vitrified, marble, and natural stone surfaces — floors, walls, and wet areas executed with perfect alignment and durable grouting.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">02</div>
-        <h3 class="service-name">POP &amp; False Ceiling Work</h3>
-        <p class="service-desc">Gypsum, plaster of paris, and grid ceilings with clean lines, flush joints, and precise level setting — designed for both aesthetics and concealment.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">03</div>
-        <h3 class="service-name">Painting Systems</h3>
-        <p class="service-desc">Full-cycle painting from surface preparation and putty to primer and finish coats — including texture, stucco, and specialty paint systems.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">04</div>
-        <h3 class="service-name">Electrical Solutions</h3>
-        <p class="service-desc">Concealed wiring, DB panel work, lighting layout execution, and switchboard finishing — coordinated with all other trades for conflict-free installation.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">05</div>
-        <h3 class="service-name">Custom Woodwork</h3>
-        <p class="service-desc">Site-built and modular carpentry: wardrobes, kitchen cabinetry, wall panelling, and millwork crafted for exact fit, finish, and longevity.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-num">06</div>
-        <h3 class="service-name">Complete Renovation</h3>
-        <p class="service-desc">Full-scope residential and commercial renovation — from demolition and civil work through every finish trade — managed with phased schedules and daily reporting.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="about-inner">
-      <div class="about-visual">
-        <div class="about-visual-inner"></div>
-        <div class="about-monogram">VJ</div>
-        <div class="about-badge">Led by expertise<br />on every site</div>
-      </div>
-      <div class="about-content">
-        <p class="section-label">Leadership</p>
-        <h2 class="about-name">Vinay Jaiswal</h2>
-        <p class="about-role">Founder &amp; Principal Executor, Sakshi Interiors</p>
-        <p class="about-text">
-          Vinay Jaiswal leads SAKSHI INTERIORS with a hands-on, site-first philosophy. His approach is built on the belief that exceptional interiors are not designed in isolation — they are executed by skilled teams who understand materials, sequencing, and craftsmanship from the ground up.
-        </p>
-        <p class="about-text">
-          With deep expertise in multi-trade coordination, Vinay has built a team that architects, designers, and builders trust to take their vision and execute it without compromise — on time, on spec, and with the detailing that makes the difference.
-        </p>
-        <div class="about-stats">
-          <div>
-            <div class="stat-num">150+</div>
-            <div class="stat-label">Projects Executed</div>
-          </div>
-          <div>
-            <div class="stat-num">6</div>
-            <div class="stat-label">Trade Specialities</div>
-          </div>
-          <div>
-            <div class="stat-num">100%</div>
-            <div class="stat-label">Site Managed</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- VALUES -->
-  <section class="values" id="values">
-    <div class="values-header">
-      <div>
-        <p class="section-label">Our Commitment</p>
-        <h2 class="section-title">The standard we hold ourselves to, <em>every day</em></h2>
-      </div>
-      <p class="section-body" style="margin-top: 3.5rem;">These aren't aspirational values on a wall. They're operational principles that govern how every team member works on every site, every day.</p>
-    </div>
-    <div class="values-grid">
-      <div class="value-item">
-        <div class="value-icon">
-          <svg viewBox="0 0 36 36"><path d="M18 3l3.5 11h11.5l-9.3 6.8 3.5 11L18 25l-9.2 6.8 3.5-11L3 8h11.5z"/></svg>
-        </div>
-        <div class="value-title">Precision &amp; Detailing</div>
-        <p class="value-body">Correct execution at every stage — proper substrate preparation, accurate setting-out, and careful finishing that eliminates rework.</p>
-      </div>
-      <div class="value-item">
-        <div class="value-icon">
-          <svg viewBox="0 0 36 36"><rect x="4" y="4" width="28" height="28" rx="2"/><path d="M4 14h28M14 4v28"/></svg>
-        </div>
-        <div class="value-title">Transparency</div>
-        <p class="value-body">Clear communication with clients, architects, and designers at every milestone — no surprises in scope, timeline, or cost.</p>
-      </div>
-      <div class="value-item">
-        <div class="value-icon">
-          <svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="14"/><path d="M18 10v8l5 3"/></svg>
-        </div>
-        <div class="value-title">Timely Delivery</div>
-        <p class="value-body">Phased scheduling and proactive coordination ensure trades are sequenced correctly and handovers happen as committed.</p>
-      </div>
-      <div class="value-item">
-        <div class="value-icon">
-          <svg viewBox="0 0 36 36"><path d="M6 18l8 8L30 10"/></svg>
-        </div>
-        <div class="value-title">Quality Workmanship</div>
-        <p class="value-body">Only skilled, experienced tradespeople — supervised on-site and held to standards that protect the long-term durability of every finish.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROCESS -->
-  <section class="process" id="process">
-    <p class="section-label">How We Work</p>
-    <h2 class="section-title">From first briefing to <em>final handover</em></h2>
-    <div class="process-steps">
-      <div class="process-step">
-        <div class="step-num">01</div>
-        <div class="step-content">
-          <h3 class="step-title">Site Assessment &amp; Scope</h3>
-          <p class="step-desc">We visit the site, review drawings and specifications, and produce a clear scope of work with material quantities, trade sequences, and preliminary timelines — before any commitment is made.</p>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="step-num">02</div>
-        <div class="step-content">
-          <h3 class="step-title">Estimation &amp; Agreement</h3>
-          <p class="step-desc">Detailed, itemised estimates with no hidden costs. We align on payment milestones, delivery dates, and scope boundaries so both parties are protected.</p>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="step-num">03</div>
-        <div class="step-content">
-          <h3 class="step-title">Mobilisation &amp; Phased Execution</h3>
-          <p class="step-desc">Works begin in the correct trade sequence — civil first, MEP rough-in, false ceilings, tile and woodwork, then finishing coats. Each phase is signed off before the next begins.</p>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="step-num">04</div>
-        <div class="step-content">
-          <h3 class="step-title">Quality Checks &amp; Snagging</h3>
-          <p class="step-desc">Internal snagging rounds are conducted by our site supervisor before client walkthroughs. Issues are resolved before they are presented for inspection — not after.</p>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="step-num">05</div>
-        <div class="step-content">
-          <h3 class="step-title">Handover &amp; Post-Completion Support</h3>
-          <p class="step-desc">A formal handover with documentation — warranties, material data sheets, and a punch-list sign-off. We remain available for post-completion concerns at no additional charge within the defect liability period.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHO WE SERVE -->
-  <section class="clients">
-    <p class="section-label">Who We Work With</p>
-    <h2 class="section-title">Trusted by every stakeholder in the <em>built environment</em></h2>
-    <p class="section-body">Our team is experienced in adapting to different workflows — from design-driven briefs from architects to fast-track timelines set by builders and developers.</p>
-    <div class="clients-list">
-      <div class="client-pill">Architects</div>
-      <div class="client-pill">Interior Designers</div>
-      <div class="client-pill">Builders &amp; Developers</div>
-      <div class="client-pill">Homeowners</div>
-      <div class="client-pill">Commercial Clients</div>
-      <div class="client-pill">Project Management Firms</div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <div class="contact" id="contact">
-    <div>
-      <h2 class="contact-headline">Ready to discuss your<br /><em>next project?</em></h2>
-    </div>
-    <a href="https://wa.me/919899831006?text=Hi%20Sakshi%20Interiors%2C%20I%27d%20like%20to%20discuss%20a%20project." class="btn-dark btn-wa" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="vertical-align:-3px;margin-right:8px;" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.122 1.523 5.859L.057 23.57a.75.75 0 00.927.928l5.808-1.462A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.695 9.695 0 01-4.947-1.355l-.355-.21-3.668.924.939-3.58-.232-.369A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
-      Chat on WhatsApp
-    </a>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <p class="hero-eyebrow">Execution-Focused Interior & Renovation</p>
+  <h1 class="hero-title">Built with<br /><em>precision.</em><br />Finished with care.</h1>
+  <p class="hero-sub">From shell stage to final handover — SAKSHI INTERIORS delivers end-to-end interior execution with quality workmanship, proper detailing, and on-site coordination you can count on.</p>
+  <div class="hero-actions">
+    <a href="#services" class="btn-primary">Explore Services</a>
+    <a href="#about" class="btn-ghost">Meet Vinay Jaiswal</a>
   </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
 
-  <!-- Floating WhatsApp Button -->
-  <a href="https://wa.me/919899831006?text=Hi%20Sakshi%20Interiors%2C%20I%27d%20like%20to%20discuss%20a%20project." class="wa-float" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
-    <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.122 1.523 5.859L.057 23.57a.75.75 0 00.927.928l5.808-1.462A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.695 9.695 0 01-4.947-1.355l-.355-.21-3.668.924.939-3.58-.232-.369A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
-    <span class="wa-tooltip">Chat with us!</span>
-  </a>
+<!-- SERVICES -->
+<section class="services" id="services">
+  <p class="section-label">What We Do</p>
+  <h2 class="section-title">End-to-end <em>execution</em> across every trade</h2>
+  <p class="section-body">We handle the complete spectrum of interior and renovation work — one team, one point of accountability, zero compromises on quality.</p>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-num">01</div><h3 class="service-name">Tile &amp; Stone Installation</h3><p class="service-desc">Precise laying of ceramic, vitrified, marble, and natural stone surfaces — floors, walls, and wet areas executed with perfect alignment and durable grouting.</p></div>
+    <div class="service-card"><div class="service-num">02</div><h3 class="service-name">POP &amp; False Ceiling Work</h3><p class="service-desc">Gypsum, plaster of paris, and grid ceilings with clean lines, flush joints, and precise level setting — designed for both aesthetics and concealment.</p></div>
+    <div class="service-card"><div class="service-num">03</div><h3 class="service-name">Painting Systems</h3><p class="service-desc">Full-cycle painting from surface preparation and putty to primer and finish coats — including texture, stucco, and specialty paint systems.</p></div>
+    <div class="service-card"><div class="service-num">04</div><h3 class="service-name">Electrical Solutions</h3><p class="service-desc">Concealed wiring, DB panel work, lighting layout execution, and switchboard finishing — coordinated with all other trades for conflict-free installation.</p></div>
+    <div class="service-card"><div class="service-num">05</div><h3 class="service-name">Custom Woodwork</h3><p class="service-desc">Site-built and modular carpentry: wardrobes, kitchen cabinetry, wall panelling, and millwork crafted for exact fit, finish, and longevity.</p></div>
+    <div class="service-card"><div class="service-num">06</div><h3 class="service-name">Complete Renovation</h3><p class="service-desc">Full-scope residential and commercial renovation — from demolition and civil work through every finish trade — managed with phased schedules and daily reporting.</p></div>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
+<div class="divider"></div>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <p class="section-label">Our Work</p>
+  <h2 class="section-title">Projects executed with <em>precision</em></h2>
+  <p class="section-body">A selection of residential and commercial spaces delivered by the Sakshi Interiors team — from raw shell to finished handover.</p>
+  <div class="gallery-grid">
+    <div class="gallery-item tall" onclick="openLightbox(this)">
+      <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=80" alt="Living Room Execution" loading="lazy" />
+      <div class="gallery-overlay"><span>Living Room</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=600&q=80" alt="False Ceiling Work" loading="lazy" />
+      <div class="gallery-overlay"><span>False Ceiling</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="Kitchen Execution" loading="lazy" />
+      <div class="gallery-overlay"><span>Kitchen</span></div>
+    </div>
+    <div class="gallery-item wide" onclick="openLightbox(this)">
+      <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80" alt="Interior Renovation" loading="lazy" />
+      <div class="gallery-overlay"><span>Full Renovation</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80" alt="Bedroom Interior" loading="lazy" />
+      <div class="gallery-overlay"><span>Bedroom</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80" alt="Bathroom Tiles" loading="lazy" />
+      <div class="gallery-overlay"><span>Tile Work</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&q=80" alt="Woodwork" loading="lazy" />
+      <div class="gallery-overlay"><span>Custom Woodwork</span></div>
+    </div>
+  </div>
+  <p style="font-size:0.78rem;color:var(--cream-dim);margin-top:1.5rem;letter-spacing:0.06em;">📸 Replace these with your own project photos for best results.</p>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&#x2715;</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-visual">
+      <div class="about-visual-inner"></div>
+      <div class="about-monogram">VJ</div>
+      <div class="about-badge">Led by expertise<br />on every site</div>
+    </div>
+    <div class="about-content">
+      <p class="section-label">Leadership</p>
+      <h2 class="about-name">Vinay Jaiswal</h2>
+      <p class="about-role">Founder &amp; Principal Executor, Sakshi Interiors</p>
+      <p class="about-text">Vinay Jaiswal leads SAKSHI INTERIORS with a hands-on, site-first philosophy. His approach is built on the belief that exceptional interiors are not designed in isolation — they are executed by skilled teams who understand materials, sequencing, and craftsmanship from the ground up.</p>
+      <p class="about-text">With deep expertise in multi-trade coordination, Vinay has built a team that architects, designers, and builders trust to take their vision and execute it without compromise — on time, on spec, and with the detailing that makes the difference.</p>
+      <div class="about-stats">
+        <div><div class="stat-num">150+</div><div class="stat-label">Projects Executed</div></div>
+        <div><div class="stat-num">6</div><div class="stat-label">Trade Specialities</div></div>
+        <div><div class="stat-num">100%</div><div class="stat-label">Site Managed</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VALUES -->
+<section class="values" id="values">
+  <div class="values-header">
     <div>
-      <div class="footer-brand">Sakshi Interiors</div>
-      <div class="footer-tagline">Precision Execution. Refined Spaces. — Led by Vinay Jaiswal</div>
+      <p class="section-label">Our Commitment</p>
+      <h2 class="section-title">The standard we hold ourselves to, <em>every day</em></h2>
     </div>
-    <div class="footer-contact">
-      <a href="mailto:sakshiinterior123@gmail.com">sakshiinterior123@gmail.com</a>
-      <a href="tel:+919899831006">+91 98998 31006</a>
-      <a href="tel:+918076656315">+91 80766 56315</a>
-    </div>
-    <div class="footer-copy">© 2025 Sakshi Interiors. All rights reserved.</div>
-  </footer>
+    <p class="section-body" style="margin-top:3.5rem;">These aren't aspirational values on a wall. They're operational principles that govern how every team member works on every site, every day.</p>
+  </div>
+  <div class="values-grid">
+    <div class="value-item"><div class="value-icon"><svg viewBox="0 0 36 36"><path d="M18 3l3.5 11h11.5l-9.3 6.8 3.5 11L18 25l-9.2 6.8 3.5-11L3 8h11.5z"/></svg></div><div class="value-title">Precision &amp; Detailing</div><p class="value-body">Correct execution at every stage — proper substrate preparation, accurate setting-out, and careful finishing that eliminates rework.</p></div>
+    <div class="value-item"><div class="value-icon"><svg viewBox="0 0 36 36"><rect x="4" y="4" width="28" height="28" rx="2"/><path d="M4 14h28M14 4v28"/></svg></div><div class="value-title">Transparency</div><p class="value-body">Clear communication with clients, architects, and designers at every milestone — no surprises in scope, timeline, or cost.</p></div>
+    <div class="value-item"><div class="value-icon"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="14"/><path d="M18 10v8l5 3"/></svg></div><div class="value-title">Timely Delivery</div><p class="value-body">Phased scheduling and proactive coordination ensure trades are sequenced correctly and handovers happen as committed.</p></div>
+    <div class="value-item"><div class="value-icon"><svg viewBox="0 0 36 36"><path d="M6 18l8 8L30 10"/></svg></div><div class="value-title">Quality Workmanship</div><p class="value-body">Only skilled, experienced tradespeople — supervised on-site and held to standards that protect the long-term durability of every finish.</p></div>
+  </div>
+</section>
 
+<!-- PROCESS -->
+<section class="process" id="process">
+  <p class="section-label">How We Work</p>
+  <h2 class="section-title">From first briefing to <em>final handover</em></h2>
+  <div class="process-steps">
+    <div class="process-step"><div class="step-num">01</div><div><h3 class="step-title">Site Assessment &amp; Scope</h3><p class="step-desc">We visit the site, review drawings and specifications, and produce a clear scope of work with material quantities, trade sequences, and preliminary timelines — before any commitment is made.</p></div></div>
+    <div class="process-step"><div class="step-num">02</div><div><h3 class="step-title">Estimation &amp; Agreement</h3><p class="step-desc">Detailed, itemised estimates with no hidden costs. We align on payment milestones, delivery dates, and scope boundaries so both parties are protected.</p></div></div>
+    <div class="process-step"><div class="step-num">03</div><div><h3 class="step-title">Mobilisation &amp; Phased Execution</h3><p class="step-desc">Works begin in the correct trade sequence — civil first, MEP rough-in, false ceilings, tile and woodwork, then finishing coats. Each phase is signed off before the next begins.</p></div></div>
+    <div class="process-step"><div class="step-num">04</div><div><h3 class="step-title">Quality Checks &amp; Snagging</h3><p class="step-desc">Internal snagging rounds are conducted by our site supervisor before client walkthroughs. Issues are resolved before they are presented for inspection — not after.</p></div></div>
+    <div class="process-step"><div class="step-num">05</div><div><h3 class="step-title">Handover &amp; Post-Completion Support</h3><p class="step-desc">A formal handover with documentation — warranties, material data sheets, and a punch-list sign-off. We remain available for post-completion concerns within the defect liability period.</p></div></div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section class="clients">
+  <p class="section-label">Who We Work With</p>
+  <h2 class="section-title">Trusted by every stakeholder in the <em>built environment</em></h2>
+  <p class="section-body">Our team is experienced in adapting to different workflows — from design-driven briefs from architects to fast-track timelines set by builders and developers.</p>
+  <div class="clients-list">
+    <div class="client-pill">Architects</div>
+    <div class="client-pill">Interior Designers</div>
+    <div class="client-pill">Builders &amp; Developers</div>
+    <div class="client-pill">Homeowners</div>
+    <div class="client-pill">Commercial Clients</div>
+    <div class="client-pill">Project Management Firms</div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <p class="section-label">Get In Touch</p>
+      <h2 class="section-title">Let's discuss your <em>next project</em></h2>
+      <p class="section-body">Fill in the form and we'll get back to you within 24 hours. Or use the WhatsApp bot to share your requirements instantly — including photos and drawings.</p>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <svg class="contact-detail-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .91h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <div class="contact-detail-text"><a href="tel:+919899831006">+91 98998 31006</a><br/><a href="tel:+918076656315">+91 80766 56315</a></div>
+        </div>
+        <div class="contact-detail">
+          <svg class="contact-detail-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div class="contact-detail-text"><a href="mailto:sakshiinterior123@gmail.com">sakshiinterior123@gmail.com</a></div>
+        </div>
+        <div class="contact-detail">
+          <svg class="contact-detail-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+          <div class="contact-detail-text"><a href="https://wa.me/919899831006" target="_blank">Chat on WhatsApp</a> — share photos &amp; drawings directly</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="form-card" id="contact-form-wrap">
+        <h3 class="form-title">Send an Enquiry</h3>
+        <p class="form-sub">We'll respond within 24 hours.</p>
+        <div class="form-row">
+          <div class="form-group"><label>Full Name *</label><input type="text" id="f-name" placeholder="Your name" /></div>
+          <div class="form-group"><label>Phone *</label><input type="tel" id="f-phone" placeholder="+91 XXXXX XXXXX" /></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" id="f-email" placeholder="your@email.com" /></div>
+        <div class="form-group"><label>Project Type * <span style="font-size:0.68rem;color:var(--cream-dim);text-transform:none;letter-spacing:0;">(select all that apply)</span></label>
+          <div class="checkbox-grid" id="f-type">
+            <label class="cb-item"><input type="checkbox" value="Residential Interior" /><span>Residential Interior</span></label>
+            <label class="cb-item"><input type="checkbox" value="Commercial Interior" /><span>Commercial Interior</span></label>
+            <label class="cb-item"><input type="checkbox" value="Full Renovation" /><span>Full Renovation</span></label>
+            <label class="cb-item"><input type="checkbox" value="Tile & Stone Work" /><span>Tile &amp; Stone Work</span></label>
+            <label class="cb-item"><input type="checkbox" value="False Ceiling / POP" /><span>False Ceiling / POP</span></label>
+            <label class="cb-item"><input type="checkbox" value="Painting" /><span>Painting</span></label>
+            <label class="cb-item"><input type="checkbox" value="Electrical Work" /><span>Electrical Work</span></label>
+            <label class="cb-item"><input type="checkbox" value="Custom Woodwork" /><span>Custom Woodwork</span></label>
+            <label class="cb-item"><input type="checkbox" value="Other" /><span>Other</span></label>
+          </div>
+        </div>
+        <div class="form-group"><label>City / Location *</label><input type="text" id="f-city" placeholder="Delhi, Noida..." /></div>
+        <div class="form-group"><label>Approximate Budget</label>
+          <select id="f-budget">
+            <option value="">Select range...</option>
+            <option>Under ₹2 Lakh</option>
+            <option>₹2 – 5 Lakh</option>
+            <option>₹5 – 10 Lakh</option>
+            <option>₹10 – 25 Lakh</option>
+            <option>₹25 Lakh+</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Tell us about your project</label><textarea id="f-message" rows="3" placeholder="Describe what you need — size, scope, timeline, special requirements..."></textarea></div>
+        <button class="form-submit" onclick="submitForm()">Send Enquiry via WhatsApp →</button>
+      </div>
+      <div class="form-success" id="form-success">
+        <div class="form-success-icon">✅</div>
+        <div class="form-success-text">Enquiry Sent!</div>
+        <p class="form-success-sub">WhatsApp is opening with your details. We'll respond shortly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <h2 class="cta-headline">Have drawings or photos<br />to <em>share with us?</em></h2>
+  <a href="https://wa.me/919899831006?text=Hi%20Sakshi%20Interiors%2C%20I%27d%20like%20to%20share%20my%20project%20details." class="btn-wa-cta" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.122 1.523 5.859L.057 23.57a.75.75 0 00.927.928l5.808-1.462A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.695 9.695 0 01-4.947-1.355l-.355-.21-3.668.924.939-3.58-.232-.369A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+    Send Photos &amp; Drawings on WhatsApp
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Sakshi Interiors</div>
+    <div class="footer-tagline">Precision Execution. Refined Spaces. — Led by Vinay Jaiswal</div>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:sakshiinterior123@gmail.com">sakshiinterior123@gmail.com</a>
+    <a href="tel:+919899831006">+91 98998 31006</a>
+    <a href="tel:+918076656315">+91 80766 56315</a>
+  </div>
+  <div class="footer-copy">© 2025 Sakshi Interiors. All rights reserved.</div>
+</footer>
+
+<!-- FLOATING WHATSAPP BOT -->
+<div class="wa-bot" id="waBot">
+  <div class="wa-bot-header">
+    <div class="wa-bot-avatar">
+      <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.122 1.523 5.859L.057 23.57a.75.75 0 00.927.928l5.808-1.462A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.695 9.695 0 01-4.947-1.355l-.355-.21-3.668.924.939-3.58-.232-.369A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+    </div>
+    <div><div class="wa-bot-name">Sakshi Interiors</div><div class="wa-bot-status">Typically replies instantly</div></div>
+    <button class="wa-bot-close" onclick="toggleBot()">&#x2715;</button>
+  </div>
+  <div class="wa-bot-messages" id="botMessages"></div>
+  <div class="wa-bot-input-area" id="botInputArea">
+    <div id="botOptions" class="wa-options"></div>
+    <div class="wa-input-row">
+      <label class="wa-file-btn" for="botFile" title="Attach photo or PDF">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
+      </label>
+      <input type="file" id="botFile" accept="image/*,.pdf" style="display:none" onchange="handleFileSelect(this)" multiple />
+      <input class="wa-bot-input" id="botInput" type="text" placeholder="Type your answer..." onkeydown="if(event.key==='Enter')sendBotMsg()" />
+      <button class="wa-bot-send" onclick="sendBotMsg()">
+        <svg viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+      </button>
+    </div>
+    <div class="wa-file-name" id="botFileName"></div>
+  </div>
+</div>
+
+<button class="wa-float" id="waFloatBtn" onclick="toggleBot()" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.122 1.523 5.859L.057 23.57a.75.75 0 00.927.928l5.808-1.462A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.695 9.695 0 01-4.947-1.355l-.355-.21-3.668.924.939-3.58-.232-.369A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+</button>
+
+<script>
+  // ── LIGHTBOX ──
+  function openLightbox(el) {
+    const img = el.querySelector('img');
+    const caption = el.querySelector('.gallery-overlay span');
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-img').alt = img.alt;
+    document.getElementById('lightbox-caption').textContent = caption ? caption.textContent : '';
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+
+  // ── CONTACT FORM ──
+  function submitForm() {
+    const name = document.getElementById('f-name').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const city = document.getElementById('f-city').value.trim();
+    const budget = document.getElementById('f-budget').value;
+    const email = document.getElementById('f-email').value.trim();
+    const message = document.getElementById('f-message').value.trim();
+    const checked = [...document.querySelectorAll('#f-type input:checked')].map(c => c.value);
+    if (!name || !phone || checked.length === 0 || !city) { alert('Please fill in Name, Phone, at least one Project Type, and City.'); return; }
+    let text = `Hi Sakshi Interiors! I'd like to discuss a project.\n\n`;
+    text += `*Name:* ${name}\n`;
+    text += `*Phone:* ${phone}\n`;
+    if (email) text += `*Email:* ${email}\n`;
+    text += `*Project Type(s):* ${checked.join(', ')}\n`;
+    text += `*City/Location:* ${city}\n`;
+    if (budget) text += `*Budget:* ${budget}\n`;
+    if (message) text += `*Details:* ${message}\n`;
+    text += `\nPlease get back to me at your earliest convenience. Thank you!`;
+    const url = `https://wa.me/919899831006?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+    document.getElementById('contact-form-wrap').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+
+  // ── WHATSAPP BOT ──
+  const botState = { step: 0, data: {}, files: [], started: false };
+  const steps = [
+    { key: 'name',     question: "👋 Hi! Welcome to *Sakshi Interiors*.\n\nI'm here to help you get a quick quote. First, what's your *full name*?", type: 'text' },
+    { key: 'phone',    question: "Thanks, {name}! 📱 What's the best *phone number* to reach you?", type: 'text' },
+    { key: 'type',     question: "What kind of work do you need? ✅ *Select all that apply* and tap *Done* when finished.", type: 'multi', options: ['Residential Interior','Commercial Interior','Full Renovation','Tile & Stone','False Ceiling / POP','Painting','Electrical Work','Custom Woodwork','Other'] },
+    { key: 'city',     question: "📍 Which *city or area* is the project in?", type: 'text' },
+    { key: 'size',     question: "Roughly, what's the *size* of the space? (e.g. 2BHK, 1000 sq ft, single room)", type: 'text' },
+    { key: 'budget',   question: "Do you have a *budget range* in mind?", type: 'options', options: ['Under ₹2 Lakh','₹2–5 Lakh','₹5–10 Lakh','₹10–25 Lakh','₹25 Lakh+','Not decided yet'] },
+    { key: 'timeline', question: "⏰ When do you need the work to *start* or *finish*?", type: 'options', options: ['Within 1 month','1–3 months','3–6 months','Just planning ahead'] },
+    { key: 'details',  question: "Any *specific requirements* we should know?\n\nYou can also 📎 *attach photos or a PDF* using the clip icon below!", type: 'text' },
+    { key: 'done',     question: "Perfect! Let me send all your details to the Sakshi Interiors team now. 🚀\n\nTap *'Send to WhatsApp'* — you can also share photos/drawings there directly!", type: 'finish' }
+  ];
+
+  function toggleBot() {
+    const bot = document.getElementById('waBot');
+    bot.classList.toggle('open');
+    if (bot.classList.contains('open') && !botState.started) { botState.started = true; setTimeout(() => showStep(0), 400); }
+  }
+
+  function showTyping(cb) {
+    const msgs = document.getElementById('botMessages');
+    const t = document.createElement('div');
+    t.className = 'wa-typing'; t.id = 'typing';
+    t.innerHTML = '<span></span><span></span><span></span>';
+    msgs.appendChild(t); msgs.scrollTop = msgs.scrollHeight;
+    setTimeout(() => { t.remove(); cb(); }, 900);
+  }
+
+  function addMsg(text, type) {
+    const msgs = document.getElementById('botMessages');
+    const m = document.createElement('div');
+    m.className = `wa-msg ${type}`;
+    m.innerHTML = text.replace(/\n/g,'<br>').replace(/\*(.*?)\*/g,'<b>$1</b>');
+    msgs.appendChild(m); msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function showStep(i) {
+    const step = steps[i];
+    const opts = document.getElementById('botOptions');
+    const inp = document.getElementById('botInput');
+    opts.innerHTML = '';
+    showTyping(() => {
+      let q = step.question.replace('{name}', botState.data.name || '');
+      addMsg(q, 'bot');
+      if (step.type === 'multi') {
+        inp.style.display = 'none';
+        const selected = new Set();
+        step.options.forEach(o => {
+          const btn = document.createElement('button');
+          btn.className = 'wa-option-btn'; btn.textContent = o;
+          btn.onclick = () => {
+            if (selected.has(o)) { selected.delete(o); btn.style.background = ''; btn.style.color = '#075E54'; }
+            else { selected.add(o); btn.style.background = '#25D366'; btn.style.color = '#fff'; }
+          };
+          opts.appendChild(btn);
+        });
+        const done = document.createElement('button');
+        done.className = 'wa-option-btn';
+        done.style.cssText = 'background:#075E54;color:#fff;border-color:#075E54;width:100%;margin-top:4px;font-weight:500;';
+        done.textContent = '✅ Done';
+        done.onclick = () => {
+          if (selected.size === 0) { alert('Please select at least one option.'); return; }
+          const val = [...selected].join(', ');
+          addMsg(val, 'user');
+          botState.data[step.key] = val;
+          opts.innerHTML = ''; inp.style.display = '';
+          nextStep();
+        };
+        opts.appendChild(done);
+      } else if (step.type === 'options') {
+        inp.style.display = 'none';
+        step.options.forEach(o => {
+          const btn = document.createElement('button');
+          btn.className = 'wa-option-btn'; btn.textContent = o;
+          btn.onclick = () => { addMsg(o, 'user'); botState.data[step.key] = o; opts.innerHTML = ''; inp.style.display = ''; nextStep(); };
+          opts.appendChild(btn);
+        });
+      } else if (step.type === 'finish') {
+        inp.style.display = 'none';
+        const btn = document.createElement('button');
+        btn.className = 'wa-option-btn';
+        btn.style.cssText = 'background:#25D366;color:#fff;border-color:#25D366;font-weight:500;padding:0.6rem 1.4rem;';
+        btn.textContent = '📲 Send to WhatsApp';
+        btn.onclick = () => { sendToWhatsApp(); };
+        opts.appendChild(btn);
+      } else {
+        inp.style.display = ''; inp.focus();
+      }
+    });
+  }
+
+  function sendBotMsg() {
+    const inp = document.getElementById('botInput');
+    const val = inp.value.trim();
+    if (!val) return;
+    addMsg(val, 'user');
+    botState.data[steps[botState.step].key] = val;
+    inp.value = '';
+    nextStep();
+  }
+
+  function nextStep() {
+    botState.step++;
+    if (botState.step < steps.length) setTimeout(() => showStep(botState.step), 300);
+  }
+
+  function handleFileSelect(input) {
+    const fileNameEl = document.getElementById('botFileName');
+    if (input.files.length > 0) {
+      const names = Array.from(input.files).map(f => f.name).join(', ');
+      botState.files = Array.from(input.files);
+      fileNameEl.textContent = '📎 ' + names;
+      fileNameEl.style.display = 'block';
+      addMsg(`📎 Attached: ${names}`, 'user');
+    }
+  }
+
+  function sendToWhatsApp() {
+    const d = botState.data;
+    let text = `Hi Sakshi Interiors! Here are my project details:\n\n`;
+    if (d.name)     text += `*Name:* ${d.name}\n`;
+    if (d.phone)    text += `*Phone:* ${d.phone}\n`;
+    if (d.type)     text += `*Work Required:* ${d.type}\n`;
+    if (d.city)     text += `*Location:* ${d.city}\n`;
+    if (d.size)     text += `*Size:* ${d.size}\n`;
+    if (d.budget)   text += `*Budget:* ${d.budget}\n`;
+    if (d.timeline) text += `*Timeline:* ${d.timeline}\n`;
+    if (d.details)  text += `*Details:* ${d.details}\n`;
+    if (botState.files.length > 0) text += `\n📎 I have ${botState.files.length} file(s) to share — sending them in this chat.\n`;
+    text += `\nPlease get back to me. Thank you!`;
+    window.open(`https://wa.me/919899831006?text=${encodeURIComponent(text)}`, '_blank');
+    document.getElementById('botMessages').innerHTML = '';
+    addMsg("✅ *WhatsApp is opening!*\n\nPlease send your photos or PDF drawings in that chat too. We'll get back to you shortly! 🙏", 'bot');
+    document.getElementById('botOptions').innerHTML = '';
+    document.getElementById('botInput').style.display = 'none';
+  }
+</script>
 </body>
 </html>
